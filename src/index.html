@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Alpine Single Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <body class="singlepage">
+    <main class="container">
+      <header>
+        <h1>Get off my lawn!</h1>
+        <nav>
+          <ul>
+            <li><a href="#">Test link</a></li>
+          </ul>
+        </nav>
+      </header>
+      <article role="main">
+        <header>Article header</header>
+        <section class="section content">
+          <div class="" 
+            x-data="{users: []}" 
+            x-init="users = await (await fetch('https://jsonplaceholder.typicode.com/users')).json()">
+            <div class="article">
+              <p>Some copy here</p>
+              <ul class="items">
+                <template x-for="user in users">
+                  <li class="item leaf">
+                    <span x-text="user.id"></span><strong>: </strong> 
+                    <span x-text="user.name"></span>
+                  </li>
+                </template>
+              </ul>
+            </div>
+            <aside class="aside" role="complementary">Some aside interrest here</aside>
+          </div>
+        </section>
+        <footer class="section footer">Article Footer</footer>
+      </article>
+      <footer>
+        <div class="footer-inner">Site footer</div>
+      </footer>
+    </main>
+  </body>
+</html>

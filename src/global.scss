@@ -1,0 +1,31 @@
+@use "sass:math";
+
+/*
+ * Variables
+ */
+$body-color: red;
+
+// section {
+//   max-width: 100%;
+// }
+body {
+  color: $body-color;
+}
+
+.container {
+  margin: 0 auto;
+  width: 960px;
+}
+
+.content {
+  // display: flex;
+  // flex-direction: column;
+}
+
+.article {
+  width: math.div(600px, 960px) * 100%;
+}
+
+.aside {
+  width: math.div(300px, 960px) * 100%;
+}
