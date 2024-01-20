@@ -5,40 +5,94 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
   <body class="singlepage">
+    <!-- <div x-data="images()"
+    x-init="fetch('https://pixabay.com/api/?key=15819227-ef2d84d1681b9442aaa9755b8&q=yellow+flowers&image_type=photo')
+    .then(response => response.json())
+    .then(response => { images = response.hits })"></div> -->
     <main class="container">
       <header>
-        <h1>Get off my lawn!</h1>
+        <h1 class="page-title">Get off my lawn!</h1>
         <nav>
           <ul>
-            <li><a href="#">Test link</a></li>
+            <li><a href="#1" target="_self">Home</a></li>
+            <li><a href="#2" target="_self">Gallery</a></li>
           </ul>
         </nav>
       </header>
-      <article role="main">
-        <header>Article header</header>
-        <section class="section content">
-          <div class="" 
+      <section role="main">
+        <div class="placeholders">
+          <div class="group theme-inverted users" 
             x-data="{users: []}" 
             x-init="users = await (await fetch('https://jsonplaceholder.typicode.com/users')).json()">
-            <div class="article">
-              <p>Some copy here</p>
-              <ul class="items">
+            <div class="users">
+              <h2 class="group__list-title">Users</h2>
+              <ul  class="group__list-items">
                 <template x-for="user in users">
-                  <li class="item leaf">
+                  <li class="group__list-item">
                     <span x-text="user.id"></span><strong>: </strong> 
                     <span x-text="user.name"></span>
                   </li>
                 </template>
               </ul>
             </div>
-            <aside class="aside" role="complementary">Some aside interrest here</aside>
+            <button class="group__btn">Click</button>
           </div>
-        </section>
-        <footer class="section footer">Article Footer</footer>
-      </article>
+          <div class="group theme-brand albums" 
+            x-data="{albums: []}" 
+            x-init="albums = await (await fetch('https://jsonplaceholder.typicode.com/users')).json()">
+            <div class="albums">
+              <h2 class="group__list-title">Albums</h2>
+              <ul class="group__feature-list">
+                <template x-for="album in albums">
+                  <li class="group__list-item">
+                    <span x-text="album.id"></span><strong>: </strong> 
+                    <span x-text="album.name"></span>
+                  </li>
+                </template>
+              </ul>
+            </div>
+            <button class="group__btn">Click</button>
+          </div>
+          <div class="group comments" 
+            x-data="{comments: []}" 
+            x-init="comments = await (await fetch('https://jsonplaceholder.typicode.com/users')).json()">
+            <div class="comments">
+              <h2 class="group__list-title">Comments</h2>
+              <ul class="group__feature-list">
+                <template x-for="comment in comments">
+                  <li class="group__list-item">
+                    <span x-text="comment.id"></span><strong>: </strong> 
+                    <span x-text="comment.name"></span>
+                  </li>
+                </template>
+              </ul>
+            </div>
+            <button class="group__btn">Click</button>
+          </div>
+        </div>
+      </section>
       <footer>
         <div class="footer-inner">Site footer</div>
       </footer>
     </main>
+    <!-- <script>
+      function images() {
+        return {
+          images: [],
+          q: "",
+          image_type: "",
+          getImages: async function() {
+            console.log("params", this.q, this.image_type);
+            const response = await fetch(
+              `https://pixabay.com/api/?key=15819227-ef2d84d1681b9442aaa9755b8&q=${
+                this.q
+              }&image_type=${this.image_type}`
+            );
+            const data = await response.json();
+            this.images = data.hits;
+          }
+        };
+      }
+    </script> -->
   </body>
 </html>
