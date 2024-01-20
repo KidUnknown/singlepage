@@ -1,5 +1,5 @@
 import Alpine from 'alpinejs';
-import './global.scss';
+import './site.scss';
 
 window.Alpine = Alpine;
 

@@ -1,0 +1,83 @@
+@import "./global-reset.scss";
+
+.page-title {
+  font-size: 3.75rem;
+  color: var(--heading-text);
+}
+  
+.container {
+  margin-inline: auto;
+  width: min(100% - 2rem, 60rem);
+
+  .placeholders {
+    border: 0.5rem solid var(--color-brand);
+    display: flex;
+  }
+}
+  
+[class*="theme-"] {
+  background: var(--bg);
+  color: var(--body-text);
+}
+  
+.theme-inverted {
+  --bg: var(--color-white);
+  --body-text: var(--color-black);
+  --heading-text: var(--color-black);
+}
+  
+@media (prefers-color-scheme: dark) {
+  .theme-inverted {
+    --bg: var(--color-black);
+    --body-text: var(--color-white);
+    --heading-text: var(--color-brand);
+  }
+}
+  
+.theme-brand {
+  --bg: var(--color-brand);
+  --body-text: var(--color-white);
+  --heading-text: var(--color-white);
+  --button-text: var(--color-brand);
+  --button-bg: var(--color-white);
+}
+  
+.group {
+  display: grid;
+  flex: 1;
+  gap: 1.25rem;
+  justify-content: center;
+  padding: 2.25rem;
+
+  &__list-title {
+    color: var(--heading-text);
+    font-size: 1.85rem;
+    text-transform: uppercase;
+  }
+
+  &__btn {
+    background-color: var(--bg);
+    border: 1px solid var(--bg);
+    box-shadow: 0 5px 15px var(--color-black);
+    border-radius: 10px;
+    color: var(--body-text);
+    padding: 0.5rem 1rem;
+    transition: padding 0.5s ease-in-out;
+
+    &:hover {
+      padding: 0.5rem 1.050rem;
+    }
+  }
+}
+  
+//   .group__users {
+  
+//   }
+  
+//   .group__albums {
+    
+//   }
+  
+//   .group__comments {
+    
+//   }
