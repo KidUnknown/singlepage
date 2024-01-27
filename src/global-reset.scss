@@ -1,4 +1,5 @@
 @import "./variables.scss";
+@import "./mixins";
 
 /*
  * Global reset 
@@ -25,6 +26,7 @@ body {
   --body-text: var(--color-white);
   --heading-text: var(--color-white);
   --bg: var(--color-black);
+  /* Default state of buttons */
   --button-text: var(--color-white);
   --button-bg: var(--color-brand);
   --button-text-hover: var(--color-white);
@@ -73,11 +75,3 @@ img {
     scroll-behavior: smooth;
   }
 }
-
-// .article {
-//   width: math.div(600px, 960px) * 100%;
-// }
-
-// .aside {
-//   width: math.div(300px, 960px) * 100%;
-// }

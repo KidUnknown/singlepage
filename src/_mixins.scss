@@ -1,0 +1,18 @@
+@mixin button-link($background: var(--bg), $color: var(--button-text), $border-color: var(--button-text)){
+  display: inline-block;
+  text-align: center;
+  // padding: $gutter-half $gutter-width;
+  color: $color;
+  background-color: $background;
+  border: 1px solid $border-color;
+  text-decoration: none;
+
+  &:first-letter {
+    text-transform: uppercase;
+  }
+
+  &:hover {
+    background: shade($background, 5%);
+    cursor: pointer;
+  }
+}

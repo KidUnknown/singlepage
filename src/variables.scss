@@ -2,8 +2,31 @@
  * Variables
  **/
 :root {
+  --ff-body: system-ui, "Segoe UI", Roboto, sans-serif;
+  --ff-heading: "Open Sans", "Helvetica Neue", sans-serif;
+  --fs-xl: clamp(3.5rem, 12vw + 1rem, 12rem);
+  --fs-l: clamp(2.5rem, 10vw + 1rem, 4rem);
+  --fs-m: clamp(2rem, 8vw + 1rem, 3rem);
+  --fs-s: clamp(1.2rem, 4vw + 1rem, 2rem);
+  --fs-xs: clamp(.6rem, 2vw + 1rem, 1rem);
+
+  --fw-900: 900;
+  --fw-700: 700;
+  --fw-600: 600;
+  --fw-400: 400;
+  --fw-200: 200;
+
   --color-brand: hsl(212 98% 37%);
   --color-white: hsl(0 0% 96%);
   --color-black: hsl(216 40% 20%);
+
+  --color-red: rgb(255 0 0 / .6);
+  --color-orange: rgb(255 165 0 / .6);
+  --color-yellow: rgb(255 255 0 / .6);
+  --color-green: rgb(0 128 0 / .6);
+  --color-blue: rgb(0 0 255 / .6);
+  --color-purple: rgb(128 0 128 / .6);
 }
 
+$colors: rgb(255 0 0 / .6), rgb(255 165 0 / .6), rgb(255 255 0 / .6), rgb(0 128 0 / .6), rgb(0 0 255 / .6), rgb(128 0 128 / .6); 
+$repeat: 20;
