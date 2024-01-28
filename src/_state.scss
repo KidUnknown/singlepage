@@ -1,0 +1,20 @@
+
+a,
+button {
+  //background-color: var(--button-bg);
+  color: var(--button-text);
+  
+  &:link,
+  &:visited {
+    color: var(--button-text);
+  }
+
+  &:focus-within {
+    outline: var(--button-hover);
+  }
+
+  &:hover {
+    background-color: var(--button-bg-hover);
+    color: var(--button-text-hover);
+  }
+}

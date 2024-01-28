@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Alpine Single Page</title>
+    <title>AlpineJs Single Page</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
-  <body class="singlepage theme-inverted">
+  <body class="singlepage">
     <main class="container" id="1">
       <header>
-        <h1 class="page-title">Get off my lawn!</h1>
+        <h1 class="page-title">AlpineJs Single Page with JsonPlaceholder</h1>
         <nav class="">
           <ul class="meta">
             <li class="meta__tag"><a href="#1" target="_self">Home</a></li>
@@ -19,7 +19,7 @@
       </header>
       <section role="main">
         <div class="grid-wrapper">
-          <div class="grid users" 
+          <div class="grid theme-inverted users" 
             x-data="{users: []}" 
             x-init="users = await (await fetch('https://jsonplaceholder.typicode.com/users')).json()">
             <div class="users">
@@ -51,7 +51,7 @@
             </div>
             <button class="grid__btn">Click</button>
           </div>
-          <div class="grid theme-wild-llama comments" 
+          <div class="grid comments" 
             x-data="{comments: []}" 
             x-init="comments = await (await fetch('https://jsonplaceholder.typicode.com/users')).json()">
             <div class="comments">

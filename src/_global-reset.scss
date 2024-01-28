@@ -1,0 +1,61 @@
+/*
+ * Global reset 
+ **/
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  min-width: 0;
+}
+
+html {
+  color-scheme: dark light;
+  hanging-punctuation: first last;
+}
+
+body {
+  margin: 0;
+  min-height: 100svh;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--ff-heading);
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: var(--fs-xl);
+  font-weight: var(--fw-600);
+}
+
+h2 {
+  font-size: var(--fs-l);
+  font-weight: var(--fw-400);
+}
+
+p {
+  font-size: var(--fs-m);
+  max-width: 75ch;
+  text-wrap: pretty;
+}
+
+img {
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-style: italic;
+  height: auto;
+  max-width: 100%;
+  shape-margin: 0.75rem;
+  vertical-align: middle;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html,
+  :has(:target) {
+    scroll-behavior: smooth;
+  }
+}
