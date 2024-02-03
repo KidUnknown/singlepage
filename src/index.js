@@ -1,27 +1,26 @@
 import Alpine from 'alpinejs';
+// import openProps from 'open-props';
+
 import './site.scss';
 
 window.Alpine = Alpine;
 
 Alpine.start();
 
-// const observer = new IntersectionObserver((sections) => {
-//   sections.forEach((section) => {
-//     if (section.isIntersecting) {
-//       section.target.classList.add('open');
-//     } else {
-//       section.target.classList.remove('open');
-//     }
-//   });
-// });
+const pageTitleWatcher = document.querySelector('.page-title');
+const primaryHeader = document.querySelector('.primary-header');
 
-// const sectionElements = document.querySelectorAll('section');
-// const closedElements = document.querySelectorAll('.closed');
-// const buttonIdClick = document.querySelectorAll('a');
+const options = {
+  root: null, // it is viewport
+  threshold: 0,
+  rootMargin: "2.5%"
+};
 
-// for (let i = 0; i < buttonIdClick.length; i++) {
-//   sectionElements[i].setAttribute('id', + i);
-//   buttonIdClick[i].setAttribute('href', `#${i+1}`);
-// }
+const scrollObserver = new IntersectionObserver(function(entries) {
+  primaryHeader.classList.toggle('sticking', !entries[0].isIntersecting);
+  // entries.forEach(entry => {
+  //   console.log('Entry: ', entry);
+  // });
+}, options);
 
-// closedElements.forEach((el) => observer.observe(el));
+scrollObserver.observe(pageTitleWatcher);

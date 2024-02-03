@@ -3,18 +3,22 @@ a,
 button {
   //background-color: var(--button-bg);
   color: var(--button-text);
+  cursor: pointer;
   
   &:link,
   &:visited {
     color: var(--button-text);
   }
 
-  &:focus-within {
-    outline: var(--button-hover);
+  &:focus-visible {
+    outline: var(--button-hover) 2px solid;
   }
 
   &:hover {
-    background-color: var(--button-bg-hover);
     color: var(--button-text-hover);
   }
+}
+
+button {
+  background-color: var(--button-bg-hover);
 }

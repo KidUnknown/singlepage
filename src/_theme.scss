@@ -1,22 +1,22 @@
 
-/* The custom properties --[name]-[purpose]in the body tag are for the use of the theming */
+/* The custom properties --[name]-[purpose] in the body tag are for the use of
+   within the theming classes */
 body {
   /* Custom properties */
   --body-text: var(--color-white);
   --heading-text: var(--color-white);
   --bg: var(--color-black);
-
-  /* Default state of buttons */
   --button-text: var(--color-white);
   --button-text-hover: var(--color-white);
   --button-bg: var(--color-brand);
   --button-bg-hover: var(--color-black);
+  --button-bg-shadow: var(--drop-shadow);
 
   color: var(--body-text);
   background-color: var(--bg);
   font-family: var(--ff-body);
-  // line-height: 1.6;
 }
+
 /* Settings for .theme- block class with custom properties */
 [class*="theme-"] {
   background: var(--bg);
@@ -62,7 +62,9 @@ body {
 }
 
 .grid {
-  &__list-items {
+  padding: 10px;
+
+  &__list{
 		list-style: none;
   }
 
@@ -100,9 +102,7 @@ body {
 	}
 }
 
-.meta {
-	padding-bottom: 2rem;
-
+.nav {
 	&__tag {
 		list-style: none;
 	}
