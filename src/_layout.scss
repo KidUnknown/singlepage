@@ -75,7 +75,7 @@
 
         @for $i from 1 through $repeat {
 					&:nth-child(#{length($colors)}n+#{$i}) {
-						background: darken(nth($colors, random(length($colors))), 30%);
+						background: darken(nth($colors, random(length($colors))), 2%);
 					}
 				}
 
@@ -96,6 +96,48 @@
 		}
 	}
 
+  /* Users layout overrides */
+  .grid__form-wrapper {
+    box-shadow: 0 15px 25px var(--drop-shadow);
+    border-radius: 0.5rem;
+    padding: 0.8rem;
+
+    .form {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+
+    [type="search"] {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 15px 20px;
+      background: #fafafa;
+      border-radius: 50px;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+      color: #777;
+      font-size: 1rem;
+      position: relative;
+    }
+
+    button, 
+    .reset {
+      text-decoration: none;
+      background: #5892fc;
+      border-radius: 50px;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      color: white;
+      padding: 10px 25px;
+      font-size: 1rem;
+      cursor: pointer;
+      font-family: 'Roboto', sans-serif;
+      font-weight: 300;
+      position: relative;
+    }
+  }
+  
 	&__list-item {
 		position: relative;
 	}

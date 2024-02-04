@@ -33,14 +33,17 @@
         <h1 class="page-title">AlpineJs Single Page data using JsonPlaceholder</h1>
         <div class="grid-wrapper">
           <div class="grid theme-inverted users">
-            <div class="grid__form">
-              <h2 class="grid__list-title">User search</h2>
+            <div class="grid__form-wrapper">
+              <h2 class="grid__form-title">User search</h2>
               <!-- Search input -->
-              <input
-                x-ref="searchInput"
-                x-model="search"
-                x-on:keydown.window.prevent.slash="$refs.searchInput.focus()" 
-                placeholder="Search for a user..." type="search" class="grid__form-input" />
+              <div class="form">
+                <input
+                  x-ref="searchInput"
+                  x-model="search"
+                  x-on:keydown.window.prevent.slash="$refs.searchInput.focus()" 
+                  placeholder="Search for a user..." type="search" class="form__input" />
+                <button class="form__btn reset">Click for users</button>
+              </div>
               <template 
                 x-for="user in filteredUsers" 
                 :key="user.id">
@@ -50,7 +53,6 @@
                   <p class="grid__list-item" x-text="user.email"></p>
                 </div>
               </template>
-              <button class="btn">Click for users</button>
               <!-- <button class="grid__btn">Click</button> -->
             </div>
           </div>

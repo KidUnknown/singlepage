@@ -16,9 +16,9 @@
   --fw-400: 400;
   --fw-200: 200;
 
-  --color-brand: hsl(212 98% 37%);
+  --color-brand: hsl(212, 44%, 77%);
   --color-white: hsl(0 0% 96%);
-  --color-black: hsl(216 40% 20%);
+  --color-black: hsl(217, 17%, 41%);
 
   --color-red: rgb(255 0 0 / .6);
   --color-orange: rgb(255 165 0 / .6);
@@ -29,5 +29,5 @@
   --drop-shadow: hsl(218 39% 10% / .7);
 }
 
-$colors: rgb(255 0 0 / .6), rgb(255 165 0 / .6), rgb(255 255 0 / .6), rgb(0 128 0 / .6), rgb(0 0 255 / .6), rgb(128 0 128 / .6); 
+$colors: hsl(212, 44%, 77%), hsl(212, 61%, 45%), hsl(212, 76%, 65%), hsl(212, 47%, 60%), hsl(212, 84%, 51%), hsl(253, 8%, 44%); 
 $repeat: 20;
