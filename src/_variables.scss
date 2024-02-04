@@ -4,11 +4,11 @@
 :root {
   --ff-body: system-ui, "Segoe UI", Roboto, sans-serif;
   --ff-heading: "Open Sans", "Helvetica Neue", sans-serif;
-  --fs-xl: clamp(3rem, 3vw + 1rem, 4.5rem);
-  --fs-l: clamp(2rem, 3vw + 1rem, 3.5rem);
-  --fs-m: clamp(0.8rem, 3vw + 1rem, 1rem);
-  --fs-s: clamp(0.7rem, 3vw + 1rem, 0.9rem);
-  --fs-xs: clamp(0.5rem, 2vw + 1rem, 0.7rem);
+  --fs-xl: clamp(2rem, 8vw + 1rem, 4.5rem);
+  --fs-l: clamp(1.6rem, 8vw + 1rem, 3.5rem);
+  --fs-m: clamp(1rem, 8vw + 1rem, 1rem);
+  --fs-s: clamp(0.7rem, 8vw + 1rem, 0.9rem);
+  --fs-xs: clamp(0.5rem, 8vw + 1rem, 0.7rem);
 
   --fw-900: 900;
   --fw-700: 700;

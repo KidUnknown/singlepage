@@ -75,7 +75,7 @@
 
         @for $i from 1 through $repeat {
 					&:nth-child(#{length($colors)}n+#{$i}) {
-						background: darken(nth($colors, random(length($colors))), 10%);
+						background: darken(nth($colors, random(length($colors))), 30%);
 					}
 				}
 
