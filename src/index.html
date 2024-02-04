@@ -36,27 +36,29 @@
       </div>
     </header>
     <section role="main">
-      <h1 class="page-title">AlpineJs Single Page with JsonPlaceholder</h1>
+      <h1 class="page-title">AlpineJs SPA</h1>
       <div class="grid-wrapper">
         <div class="grid theme-inverted users">
+          <p>Some scatty notes...</p>
           <ul>
-            <li>The page only fetches data once and is stored in allUsers, the template loop data is filteredUsers.</li>
+            <li>The page fetches data only once on body load and is stored in allUsers</li>
+            <li>On search: allUsers is filtered into the filteredUsers array which is the template repeat data</li>
             <li>The body x-data getusers() makes and globally initializes/defines all the root variables in the getusers
               function</li>
-            <li>I think you could do this instead of getUsers(): x-data="allUsers =[], myVar = 'Yay'" </li>
+            <li>I suspect] you could do this instead of getUsers(): x-data="allUsers =[], myVar = 'Yay'" </li>
             <li>Or possibly combine both eg: x-data="getUsers(), myVar ='Yay'" but getUsers is the neatest method</li>
-            <li>After x-data runs the x-init immideatley populates the global allUsers array with the response {
+            <li>After x-data runs the x-init immideatley populates the global allUsers see {
               allUsers = response }</li>
             <li>If we filter the original allUsers the next search will be on just the remaining records, gone means
               gone!</li>
-            <li>We create a new filteredUsers array (template loop data) from the original allUsers every time we search
-            </li>
-            <li>Note: if you copy an object they are both the same object, if you filter/delete records in one it also
+            <li>We create a new filteredUsers array from the original allUsers every time we search</li>
+            <li>Note: if you copy an object they are both the same object, so if you filter/delete records in one it also
               changes the copy. </li>
               <li>Use the spread operater to de-reference the copy like this</li>
               <li>this.filteredUsers = [...this.allUsers] </li>
           </ul>
-          <p>The template data 'filteredUsers' array is not populated until you do a search which satisfies the initial state of show none</p>
+          <p>The template data 'filteredUsers' array is not populated until you do a search which 
+            satisfies the requirement of initial state of show none. Example code included for Equals and Contains search</p>
           <div class="users">
             <h2 class="grid__list-title">User search</h2>
             <input x-ref="searchInput" x-model="search" x-on:keydown.window.prevent.slash="$refs.searchInput.focus()"
@@ -191,21 +193,23 @@
         },
         filterUsers() {
           // example using: StartsWith
-          this.search = this.search.toLowerCase().trim()
-          console.log('filterUsers starting with: ', this.search)
-          // if no search then reset the loop data to empty, is that what was wanted?
-          if (this.search === '') {
+          // format/simplify the search query
+          const searchVal = this.search.toLowerCase().trim()
+          console.log('filterUsers with: ', searchVal)
+
+          // if search empty then reset the template loop data to empty, is that what was wanted?
+          if (searchVal === '') {
             this.filteredUsers = [];
           } else {
             // put the filtered and de-referenced allUsers.filter() return into filteredUsers (seems to work???) 
             this.filteredUsers = [...this.allUsers.filter((user) => {
-              // also lower the search field for an easy code read
-              user.name = user.name.toLowerCase().trim() 
-              console.log('status: ', user.name, this.search, user.name.startsWith(this.search))
+              // format field val for an easy code read
+              const uname = user.name.toLowerCase().trim() 
+              console.log('status: ', uname, searchVal, name.startsWith(searchVal))
               // if below is true add to the return data
-              return user.name.startsWith(this.search)
-              // Equals: return user.name === this.search
-              // Contains: return user.name.includes(this.search)
+              return uname.startsWith(searchVal)
+              // Equals: return uname === searchVal
+              // Contains: return uname.includes(searchVal)
             })];
 
           }
