@@ -6,11 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
-<body class="singlepage" x-data="getUsers()" x-init="fetch('https://jsonplaceholder.typicode.com/users')
-  .then(response => response.json())
-  .then(response => { allUsers = response })">
+<body class="singlepage" x-data="loadVariables(), gvTest='a global variable msg'" x-init="fetchUsers()">
 
-  <!-- x-init="userData = await (await fetch('https://jsonplaceholder.typicode.com/users')).json()" -->
   <main class="container" id="1">
     <header class="primary-header">
       <div class="primary-header__inner">
@@ -39,16 +36,11 @@
       <h1 class="page-title">AlpineJs SPA</h1>
       <div class="grid-wrapper">
         <div class="grid theme-inverted users">
-          <p>Some scatty notes...</p>
           <ul>
             <li>The page fetches data only once on body load and is stored in allUsers</li>
             <li>On search: allUsers is filtered into the filteredUsers array which is the template repeat data</li>
-            <li>The body x-data getusers() makes and globally initializes/defines all the root variables in the getusers
-              function</li>
-            <li>I suspect] you could do this instead of getUsers(): x-data="allUsers =[], myVar = 'Yay'" </li>
-            <li>Or possibly combine both eg: x-data="getUsers(), myVar ='Yay'" but getUsers is the neatest method</li>
-            <li>After x-data runs the x-init immideatley populates the global allUsers see {
-              allUsers = response }</li>
+            <li>The body x-data loadVariables() globally initializes/defines all the root variables in the function</li>
+            <li>Combine a loader and other global vars eg: x-data="loadVariables(), myVar ='Yay'"</li>
             <li>If we filter the original allUsers the next search will be on just the remaining records, gone means
               gone!</li>
             <li>We create a new filteredUsers array from the original allUsers every time we search</li>
@@ -57,29 +49,37 @@
               <li>Use the spread operater to de-reference the copy like this</li>
               <li>this.filteredUsers = [...this.allUsers] </li>
           </ul>
-          <p>The template data 'filteredUsers' array is not populated until you do a search which 
-            satisfies the requirement of initial state of show none. Example code included for Equals and Contains search</p>
+          <span>The template data 'filteredUsers' array is not populated until you do a search which 
+            satisfies the requirement of initial state of show none. Example code included for Equals and Contains search
+          </span>
+          <div>Variable scope test: <span x-text="gvTest"></span></div>
           <div class="users">
             <h2 class="grid__list-title">User search</h2>
+            
             <input x-ref="searchInput" x-model="search" x-on:keydown.window.prevent.slash="$refs.searchInput.focus()"
               placeholder="Search for a user..." type="search" class="grid__form-input" />
             <button x-on:click="filterUsers()" class="grid__btn">startsWith</button>
             <button x-on:click="showAll()" class="grid__btn">showAll</button>
             <button x-on:click="hideAll()" class="grid__btn">hideAll</button>
+                                  
+            <p>
+              Searching <span x-text="allUsers.length"></span> 
+              users for "<span x-text="search"></span>" 
+              found <span x-text="filteredUsers.length"></span> users
+            </p>
 
+            <br><br>
             <template x-for="user in filteredUsers" :key="user.id">
               <div class="">
+                <hr>
                 <div class="">
                   <p class="" x-text="user.name"></p>
                   <p class="" x-text="user.username"></p>
                   <p class="" x-text="user.email"></p>
                 </div>
-                <hr>
               </div>
-
             </template>
           </div>
-
         </div>
       </div>
       <!-- <div class="placeholders" id="2">
@@ -168,17 +168,18 @@
           </div>
         </div> -->
     </section>
-    <footer>
+    <!-- <footer>
       <div class="footer-inner">
         <div>
           <p>Site footer</p>
         </div>
-    </footer>
+    </footer> -->
   </main>
   <script>
-    function getUsers() {
+    function loadVariables() {
+      // it loads functions as well, it replaces react component code  
       // when getting and setting variable values inside this function we have to use the this. notation
-      // eg; search is a variable string accessed like this locally: this.search = 'abc'
+      // eg; 'search' is a string variable accessed like this locally: this.search = 'abc'
       return {
         search: '',
         allUsers: [],
@@ -192,29 +193,34 @@
           this.filteredUsers = []
         },
         filterUsers() {
-          // example using: StartsWith
           // format/simplify the search query
           const searchVal = this.search.toLowerCase().trim()
-          console.log('filterUsers with: ', searchVal)
 
-          // if search empty then reset the template loop data to empty, is that what was wanted?
+          // if search empty then reset loop data to empty
           if (searchVal === '') {
             this.filteredUsers = [];
           } else {
-            // put the filtered and de-referenced allUsers.filter() return into filteredUsers (seems to work???) 
+            // filter allUsers and put results into filteredUsers 
             this.filteredUsers = [...this.allUsers.filter((user) => {
               // format field val for an easy code read
               const uname = user.name.toLowerCase().trim() 
-              console.log('status: ', uname, searchVal, name.startsWith(searchVal))
-              // if below is true add to the return data
-              return uname.startsWith(searchVal)
-              // Equals: return uname === searchVal
-              // Contains: return uname.includes(searchVal)
+              console.log('status: ', uname, searchVal, uname.startsWith(searchVal))
+              // if below is true add the row to the return data
+              return uname.startsWith(searchVal)    // Startswith
+              // return uname === searchVal         // Equals
+              // return uname.includes(searchVal)   // Contains
             })];
 
           }
           console.log('allUsers', this.allUsers),
           console.log('filteredUsers', this.filteredUsers)
+        },
+        fetchUsers() {
+          // use any fetch/await/syncio code here as long as you update the allUsers array
+          // best to put fetch code here rather than in html body tag?
+          fetch('https://jsonplaceholder.typicode.com/users')
+            .then(response => response.json())
+            .then(response => { this.allUsers = response })
         }
       };
     }
