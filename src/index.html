@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
-<body class="singlepage" x-data="loadVariables(), gvTest='a global variable msg'" x-init="fetchUsers()">
+<body class="singlepage" x-data="loadVariables(), msg='a global variable!'" x-init="fetchUsers()">
 
   <main class="container" id="1">
     <header class="primary-header">
@@ -36,35 +36,63 @@
       <h1 class="page-title">AlpineJs SPA</h1>
       <div class="grid-wrapper">
         <div class="grid theme-inverted users">
-          <ul>
-            <li>The page fetches data only once on body load and is stored in allUsers</li>
-            <li>On search: allUsers is filtered into the filteredUsers array which is the template repeat data</li>
-            <li>The body x-data loadVariables() globally initializes/defines all the root variables in the function</li>
-            <li>Combine a loader and other global vars eg: x-data="loadVariables(), myVar ='Yay'"</li>
-            <li>If we filter the original allUsers the next search will be on just the remaining records, gone means
-              gone!</li>
-            <li>We create a new filteredUsers array from the original allUsers every time we search</li>
-            <li>Note: if you copy an object they are both the same object, so if you filter/delete records in one it also
-              changes the copy. </li>
-              <li>Use the spread operater to de-reference the copy like this</li>
-              <li>this.filteredUsers = [...this.allUsers] </li>
-          </ul>
-          <span>The template data 'filteredUsers' array is not populated until you do a search which 
-            satisfies the requirement of initial state of show none. Example code included for Equals and Contains search
-          </span>
-          <div>Variable scope test: <span x-text="gvTest"></span></div>
+
+          <div>Msg: <span x-text="msg"></span></div>
           <div class="users">
             <h2 class="grid__list-title">User search</h2>
-            
-            <input x-ref="searchInput" x-model="search" x-on:keydown.window.prevent.slash="$refs.searchInput.focus()"
-              placeholder="Search for a user..." type="search" class="grid__form-input" />
-            <button x-on:click="filterUsers()" class="grid__btn">startsWith</button>
-            <button x-on:click="showAll()" class="grid__btn">showAll</button>
-            <button x-on:click="hideAll()" class="grid__btn">hideAll</button>
-                                  
+            <!-- create a new var 'showHelp' = false then toggle onclick for the x-show --> 
+            <div x-data="{ showHelp: false }">
+              <button x-on:click="showHelp = ! showHelp">Help</button>
+              <div x-show="showHelp">
+                <ul>
+                  <li>The page fetches data only once on body load and is stored in allUsers</li>
+                  <li>On search: allUsers is filtered into the filteredUsers array which is the template repeat data</li>
+                  <li>The body x-data loadVariables() globally initializes/defines all the root variables in the function
+                  </li>
+                  <li>Combine a loader and other global vars eg: x-data="loadVariables(), myVar ='Yay'"</li>
+                  <li>If we filter the original allUsers the next search will be on just the remaining records, gone means
+                    gone!</li>
+                  <li>We create a new filteredUsers array from the original allUsers every time we search</li>
+                  <li>Note: if you copy an object they are both the same object, so if you filter/delete records in one it
+                    also
+                    changes the copy. </li>
+                  <li>Use the spread operater to de-reference the copy like this</li>
+                  <li>this.filteredUsers = [...this.allUsers] </li>
+                </ul>
+                <span>The template data 'filteredUsers' array is not populated until you do a search which
+                  satisfies the requirement of initial state of show none. Example code included for Equals and Contains
+                  search
+                </span>
+              </div>
+            </div>
             <p>
-              Searching <span x-text="allUsers.length"></span> 
-              users for "<span x-text="search"></span>" 
+              <a href="#" x-on:click="showAll()" class="">showAll</a>
+              <a href="#" x-on:click="hideAll()" class="">hideAll</a>
+            </p>
+            <!-- the name of the user.field to search on and watch searchField changes to run the filter again -->
+            <p x-init="$watch('searchField', value => filterUsers())">Search Field: 
+              <input type="radio" value="name" x-model="searchField">
+              <input type="radio" value="email" x-model="searchField">
+              <input type="radio" value="phone" x-model="searchField">
+              <span x-text="searchField"></span>
+            </p>
+            <!-- watch for change in searchType and re-filter the list. only show when a searchField is selected -->
+            <p x-init="$watch('searchType', value => filterUsers())" x-show="searchField.length > 0">Search Type: 
+              <input type="radio" value="startswith" x-model="searchType">
+              <input type="radio" value="equals" x-model="searchType">
+              <input type="radio" value="contains" x-model="searchType">
+              <span x-text="searchType"></span>
+            </p>
+
+            <!-- show when both are selected -->
+            <div x-show="searchField.length > 0 && searchType.length > 0">
+              <input x-model="search" @keyup="filterUsers()"
+              placeholder="Search for a user..." type="search" class="grid__form-input" />
+            </div>
+
+            <p x-show="search.length > 0">
+              Searching <span x-text="allUsers.length"></span>
+              users "<span x-text="searchField"></span>" field that "<span x-text="searchType"></span>" "<span x-text="search"></span>"
               found <span x-text="filteredUsers.length"></span> users
             </p>
 
@@ -76,6 +104,7 @@
                   <p class="" x-text="user.name"></p>
                   <p class="" x-text="user.username"></p>
                   <p class="" x-text="user.email"></p>
+                  <p class="" x-text="user.phone"></p>
                 </div>
               </div>
             </template>
@@ -182,10 +211,15 @@
       // eg; 'search' is a string variable accessed like this locally: this.search = 'abc'
       return {
         search: '',
+        searchType: '',   // Radio: startswith, contains, equals
+        searchField: '',  // Radio: the user property or field to search: name, email, phone
         allUsers: [],
         filteredUsers: [],
+        test(val) {
+          console.log('test: ', val, 'search=',this.search)
+        },
         showAll() {
-          // just put all the original users into the de-referenced filtered list/ template loop
+          // just put all the original users into the template loop array
           this.filteredUsers = [...this.allUsers]
         },
         hideAll() {
@@ -193,31 +227,39 @@
           this.filteredUsers = []
         },
         filterUsers() {
-          // format/simplify the search query
+          // get the search query
           const searchVal = this.search.toLowerCase().trim()
+          // empty the list currently on display
+          this.filteredUsers = [];
 
-          // if search empty then reset loop data to empty
-          if (searchVal === '') {
-            this.filteredUsers = [];
+          // if search empty etc then reset the filteredUsers loop data to empty
+          if (searchVal == '' || this.searchField == '' || this.searchType == '' || this.allUsers.length < 1) {
+            console.log('empty search: do nothing')
           } else {
+
             // filter allUsers and put results into filteredUsers 
             this.filteredUsers = [...this.allUsers.filter((user) => {
-              // format field val for an easy code read
-              const uname = user.name.toLowerCase().trim() 
-              console.log('status: ', uname, searchVal, uname.startsWith(searchVal))
-              // if below is true add the row to the return data
-              return uname.startsWith(searchVal)    // Startswith
-              // return uname === searchVal         // Equals
-              // return uname.includes(searchVal)   // Contains
+              // NB: user[variable] is the same as user.name eg; dot becomes brackets when using variable property names in js
+              const fieldVal = user[this.searchField].toLowerCase().trim()
+              
+              // if true add the row to the return data
+              if(this.searchType === 'startswith') {
+                console.log(fieldVal, 'startsWith: ',  searchVal, fieldVal.startsWith(searchVal))
+                return fieldVal.startsWith(searchVal)
+              }
+              if(this.searchType === 'equals') {
+                console.log(fieldVal, 'equals: ', searchVal, fieldVal === searchVal)
+                return fieldVal === searchVal      
+              }
+              if(this.searchType === 'contains') {
+                console.log( fieldVal, 'contains: ', searchVal, fieldVal.includes(searchVal))
+               return fieldVal.includes(searchVal)
+              }
             })];
-
           }
-          console.log('allUsers', this.allUsers),
-          console.log('filteredUsers', this.filteredUsers)
         },
         fetchUsers() {
           // use any fetch/await/syncio code here as long as you update the allUsers array
-          // best to put fetch code here rather than in html body tag?
           fetch('https://jsonplaceholder.typicode.com/users')
             .then(response => response.json())
             .then(response => { this.allUsers = response })
