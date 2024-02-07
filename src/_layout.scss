@@ -108,7 +108,7 @@
       align-items: center;
     }
 
-    [type="search"] {
+    .grid__form-input {
       width: 100%;
       box-sizing: border-box;
       padding: 15px 20px;
@@ -121,8 +121,7 @@
       position: relative;
     }
 
-    button, 
-    .reset {
+    button {
       text-decoration: none;
       background: #5892fc;
       border-radius: 50px;

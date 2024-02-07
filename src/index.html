@@ -41,7 +41,7 @@
           <div class="users">
             <h2 class="grid__list-title">User search</h2>
             <!-- create a new var 'showHelp' = false then toggle onclick for the x-show --> 
-            <div x-data="{ showHelp: false }">
+            <div x-data="{ showHelp: false }" class="grid__form-wrapper">
               <button x-on:click="showHelp = ! showHelp">Help</button>
               <div x-show="showHelp">
                 <ul>
@@ -64,81 +64,57 @@
                   search
                 </span>
               </div>
-            </div>
-            <p>
-              <a href="#" x-on:click="showAll()" class="">showAll</a>
-              <a href="#" x-on:click="hideAll()" class="">hideAll</a>
-            </p>
-            <!-- the name of the user.field to search on and watch searchField changes to run the filter again -->
-            <p x-init="$watch('searchField', value => filterUsers())">Search Field: 
-              <input type="radio" value="name" x-model="searchField">
-              <input type="radio" value="email" x-model="searchField">
-              <input type="radio" value="phone" x-model="searchField">
-              <span x-text="searchField"></span>
-            </p>
-            <!-- watch for change in searchType and re-filter the list. only show when a searchField is selected -->
-            <p x-init="$watch('searchType', value => filterUsers())" x-show="searchField.length > 0">Search Type: 
-              <input type="radio" value="startswith" x-model="searchType">
-              <input type="radio" value="equals" x-model="searchType">
-              <input type="radio" value="contains" x-model="searchType">
-              <span x-text="searchType"></span>
-            </p>
+              <p>
+                <a href="#" x-on:click="showAll()" class="">showAll</a>
+                <a href="#" x-on:click="hideAll()" class="">hideAll</a>
+              </p>
+              <!-- the name of the user.field to search on and watch searchField changes to run the filter again -->
+              <p x-init="$watch('searchField', value => filterUsers())">Search Field: 
+                <input type="radio" value="name" x-model="searchField">
+                <input type="radio" value="email" x-model="searchField">
+                <input type="radio" value="phone" x-model="searchField">
+                <span x-text="searchField"></span>
+              </p>
+              <!-- watch for change in searchType and re-filter the list. only show when a searchField is selected -->
+              <p x-init="$watch('searchType', value => filterUsers())" x-show="searchField.length > 0">Search Type: 
+                <input type="radio" value="startswith" x-model="searchType">
+                <input type="radio" value="equals" x-model="searchType">
+                <input type="radio" value="contains" x-model="searchType">
+                <span x-text="searchType"></span>
+              </p>
 
-            <!-- show when both are selected -->
-            <div x-show="searchField.length > 0 && searchType.length > 0">
-              <input x-model="search" @keyup="filterUsers()"
-              placeholder="Search for a user..." type="search" class="grid__form-input" />
-            </div>
-
-            <p x-show="search.length > 0">
-              Searching <span x-text="allUsers.length"></span>
-              users "<span x-text="searchField"></span>" field that "<span x-text="searchType"></span>" "<span x-text="search"></span>"
-              found <span x-text="filteredUsers.length"></span> users
-            </p>
-
-            <br><br>
-            <template x-for="user in filteredUsers" :key="user.id">
-              <div class="">
-                <hr>
-                <div class="">
-                  <p class="" x-text="user.name"></p>
-                  <p class="" x-text="user.username"></p>
-                  <p class="" x-text="user.email"></p>
-                  <p class="" x-text="user.phone"></p>
-                </div>
+              <!-- show when both are selected -->
+              <div x-show="searchField.length > 0 && searchType.length > 0">
+                <input x-model="search" @keyup="filterUsers()"
+                placeholder="Search for a user..." type="search" class="grid__form-input" />
               </div>
-            </template>
+
+              <p x-show="search.length > 0">
+                Searching <span x-text="allUsers.length"></span>
+                users "<span x-text="searchField"></span>" field that "<span x-text="searchType"></span>" "<span x-text="search"></span>"
+                found <span x-text="filteredUsers.length"></span> users
+              </p>
+
+              <br><br>
+              <template x-for="user in filteredUsers" :key="user.id">
+                <div class="">
+                  <hr>
+                  <div class="">
+                    <p class="" x-text="user.name"></p>
+                    <p class="" x-text="user.username"></p>
+                    <p class="" x-text="user.email"></p>
+                    <p class="" x-text="user.phone"></p>
+                  </div>
+                </div>
+              </template>
+            </div>
+            <!-- <div class="form"> -->
+              
+            <!-- </div> -->
           </div>
         </div>
       </div>
-      <!-- <div class="placeholders" id="2">
-          <div class="grid theme-brand posts" x-data="{posts: []}" 
-          x-init="posts = await (await fetch('https://jsonplaceholder.typicode.com/posts')).json()">
-            <h2 class="grid__list-title">Posts</h2>
-            <div class="grid__list">
-              <template x-for="post in posts">
-                <div class="grid__list-item">
-                  <h3 x-text="post.title"></h3>
-                  <p x-text="post.body"></p>
-                </div>
-              </template>
-            </div>
-          </div>
-        </div> -->
-      <!-- <div class="placeholders" id="3">
-          <div class="grid theme-wild-llama todos" x-data="{todos: []}" 
-          x-init="todos = await (await fetch('https://jsonplaceholder.typicode.com/todos')).json()">
-            <h2 class="grid__list-title">Todo's</h2>
-            <div class="grid__list">
-              <template x-for="todo in todos">
-                <div class="grid__list-item">
-                  <p x-text="todo.id"></p>
-                </div>
-              </template>
-            </div>
-          </div>
-        </div> -->
-      <!-- <div class="placeholders" id="4">
+      <div class="placeholders" id="4">
           <div class="grid albums">
             <h2 class="grid__list-title">Albums</h2>
             <div class="grid__list">
@@ -195,14 +171,14 @@
               </div>
             </div>
           </div>
-        </div> -->
+        </div>
     </section>
-    <!-- <footer>
+    <footer>
       <div class="footer-inner">
         <div>
           <p>Site footer</p>
         </div>
-    </footer> -->
+    </footer>
   </main>
   <script>
     function loadVariables() {
