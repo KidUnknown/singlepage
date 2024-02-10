@@ -4,11 +4,11 @@
 :root {
   --ff-body: system-ui, "Segoe UI", Roboto, sans-serif;
   --ff-heading: "Open Sans", "Helvetica Neue", sans-serif;
-  --fs-xl: clamp(2rem, 8vw + 1rem, 4.5rem);
-  --fs-l: clamp(1.6rem, 8vw + 1rem, 3.5rem);
-  --fs-m: clamp(1rem, 8vw + 1rem, 1rem);
-  --fs-s: clamp(0.7rem, 8vw + 1rem, 0.9rem);
-  --fs-xs: clamp(0.5rem, 8vw + 1rem, 0.7rem);
+  --fs-xl: clamp(2rem, 5vw + 1rem, 4.5rem);
+  --fs-l: clamp(1.6rem, 5vw + 1rem, 3.5rem);
+  --fs-m: clamp(1rem, 5vw + 1rem, 1rem);
+  --fs-s: clamp(0.7rem, 5vw + 1rem, 0.9rem);
+  --fs-xs: clamp(0.5rem, 5vw + 1rem, 0.7rem);
 
   --fw-900: 900;
   --fw-700: 700;
@@ -16,9 +16,9 @@
   --fw-400: 400;
   --fw-200: 200;
 
-  --color-brand: hsl(212, 44%, 77%);
+  --color-brand: hsl(212, 69%, 40%);
   --color-white: hsl(0 0% 96%);
-  --color-black: hsl(217, 17%, 41%);
+  --color-black: hsl(217, 35%, 21%);
 
   --color-red: rgb(255 0 0 / .6);
   --color-orange: rgb(255 165 0 / .6);
@@ -26,7 +26,9 @@
   --color-green: rgb(0 128 0 / .6);
   --color-blue: rgb(0 0 255 / .6);
   --color-purple: rgb(128 0 128 / .6);
-  --drop-shadow: hsl(218 39% 10% / .7);
+  --drop-shadow: hsl(218 39% 10% / .5);
+
+  --nav-menu-height: 50px;
 }
 
 $colors: hsl(212, 44%, 77%), hsl(212, 61%, 45%), hsl(212, 76%, 65%), hsl(212, 47%, 60%), hsl(212, 84%, 51%), hsl(253, 8%, 44%); 

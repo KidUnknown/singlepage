@@ -4,7 +4,7 @@
 body {
   /* Custom properties */
   --body-text: var(--color-white);
-  --heading-text: var(--color-white);
+  --heading-text: var(--color-brand);
   --bg: var(--color-black);
   --button-text: var(--color-white);
   --button-text-hover: var(--color-white);
@@ -74,6 +74,7 @@ body {
 		font-weight: var(--fw-600);
 		text-transform: uppercase;
 		text-align: center;
+    margin-top: 0;
 	}
 
 	&__img {
@@ -101,4 +102,19 @@ body {
 	&__tag {
 		list-style: none;
 	}
+}
+
+.footer-inner {
+  background: var(--color-brand);
+  padding-top: 2rem;
+  margin-inline: auto;
+  width: min(100%, 59rem);
+}
+
+.primary-header {
+  min-height: var(--nav-menu-height);
+}
+
+.container {
+  margin-top: min(var(--nav-menu-height) * 1.5);
 }

@@ -51,8 +51,16 @@
       color: var(--_logo-color);
     }
   }
+}
 
-  // .page-title {
-
-  // }
+footer {
+  margin-top: min(var(--nav-menu-height));
+  position: relative;
+  background: var(--color-brand);
+  left: 50%;
+  right: 50%;
+  transform: translate(-50%);
+  width: 100vw;
+  min-height: 300px;
+  padding-inline: 1.5rem;
 }

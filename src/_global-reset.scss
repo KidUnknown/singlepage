@@ -9,12 +9,12 @@
 
 *:not(h1,h2,h3,h4,h5,h6,p,blockquote,ul,ol) {
   margin: 0;
-  min-width: 0;
+  // min-width: 0;
 }
 
 html {
   color-scheme: dark light;
-  hanging-punctuation: first last;
+  // hanging-punctuation: first last;
 }
 
 body {
@@ -57,5 +57,6 @@ img {
   html,
   :has(:target) {
     scroll-behavior: smooth;
+    scroll-padding-block-start: 4.5rem;
   }
 }

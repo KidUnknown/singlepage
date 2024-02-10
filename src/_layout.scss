@@ -21,39 +21,6 @@
 	&__list {
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(min(100%, 160px), 1fr));
-
-		/* Posts layout overrides */
-		// .posts & {
-		// 	display: flex;
-		// 	flex-flow: column wrap;
-		// 	align-content: space-between;
-		// 	justify-content: flex-start;
-
-		// 	&:before,
-		// 	&:after {
-		// 		content: "";
-		// 		display: flex;
-		// 		flex-basis: 100%;
-		// 		width: 0;
-		// 		order: 2;
-		// 	}
-
-		// 	.grid__list-item {
-		// 		margin-bottom: 2%; /* (100 - 32 * 3) / 2 */
-		// 		width: 32%;
-
-		// 		@for $i from 1 through $repeat {
-		// 			&:nth-child(#{length($colors)}n+#{$i}) {
-		// 				background: darken(nth($colors, random(length($colors))), 10%);
-		// 			}
-		// 		}
-
-		// 		/* Re-order items into rows */
-		// 		&:nth-child(3n+1) { order: 1; }
-		// 		&:nth-child(3n+2) { order: 2; }
-		// 		&:nth-child(3n)   { order: 3; }
-		// 	}
-		// }
 		
 		/* Albums layout overrides */
 		.albums & {
@@ -69,8 +36,8 @@
 
 			/* Main list styling */
 			.grid__list-item {
-        box-shadow: 0 15px 25px var(--drop-shadow);
-        border-radius: 0.5rem;
+        //box-shadow: 0 15px 25px var(--drop-shadow);
+        //border-radius: 0.5rem;
         padding: 0.8rem;
 
         @for $i from 1 through $repeat {
@@ -94,61 +61,37 @@
 				}
 			}
 		}
+
+    /* Users layout overrides */
+    .users & {
+      display: grid;
+      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      width: min(100%, 59rem);
+
+      .grid__list-item {
+        box-shadow: 0 15px 25px var(--drop-shadow);
+        border-radius: 0.5rem;
+        padding: 0.8rem;
+      }
+    }
 	}
-
-  /* Users layout overrides */
-  .grid__form-wrapper {
-    box-shadow: 0 15px 25px var(--drop-shadow);
-    border-radius: 0.5rem;
-    padding: 0.8rem;
-
-    .form {
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-    }
-
-    [type="search"] {
-      width: 100%;
-      box-sizing: border-box;
-      padding: 15px 20px;
-      background: #fafafa;
-      border-radius: 50px;
-      border-top-right-radius: 0;
-      border-bottom-right-radius: 0;
-      color: #777;
-      font-size: 1rem;
-      position: relative;
-    }
-
-    button, 
-    .reset {
-      text-decoration: none;
-      background: #5892fc;
-      border-radius: 50px;
-      border-top-left-radius: 0;
-      border-bottom-left-radius: 0;
-      color: white;
-      padding: 10px 25px;
-      font-size: 1rem;
-      cursor: pointer;
-      font-family: 'Roboto', sans-serif;
-      font-weight: 300;
-      position: relative;
-    }
-  }
-  
+    
 	&__list-item {
 		position: relative;
 	}
 
-	/* First triple row grid <ul> */
-	&__feature-list {
-		.grid__list-item {
-			list-style: none;
-			border: 0;
-		}
-	}
+  .form__input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 15px 20px;
+    background: #fafafa;
+    border-radius: 50px;
+    border: 0;
+    color: #777;
+    font-size: 1rem;
+    position: relative;
+  }
 }
   
 /* Navigation and tagging links */
@@ -156,5 +99,4 @@
 	display: flex;
 	flex-wrap: wrap;
 	gap: 0.5rem 1rem;
-	//padding-bottom: 2rem;
 }

@@ -4,7 +4,7 @@
     <title>AlpineJs Single Page</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
-  <body class="singlepage">
+  <body class="singlepage theme-inverted">
     <main class="container" id="1" x-data="getUserData()">
       <header class="primary-header">
         <div class="primary-header__inner">
@@ -32,32 +32,32 @@
       <section role="main">
         <h1 class="page-title">AlpineJs Single Page data using JsonPlaceholder</h1>
         <div class="grid-wrapper">
-          <div class="grid theme-inverted users">
-            <div class="grid__form-wrapper">
-              <h2 class="grid__form-title">User search</h2>
+          <div class="grid users">
+            <header >
+              <h2 class="grid__list-title">User search</h2>
               <!-- Search input -->
-              <div class="form">
-                <input
-                  x-ref="searchInput"
-                  x-model="search"
-                  x-on:keydown.window.prevent.slash="$refs.searchInput.focus()" 
-                  placeholder="Search for a user..." type="search" class="form__input" />
-                <button class="form__btn reset">Click for users</button>
-              </div>
+              <input class="form__input" 
+                x-ref="searchInput"
+                x-model="search"
+                x-on:keydown.window.prevent.slash="$refs.searchInput.focus()" 
+                placeholder="Search for a user..." type="search"/>
+            </header>
+            <section class="grid__list">
               <template 
                 x-for="user in filteredUsers" 
                 :key="user.id">
-                <div class="grid__list">
-                  <p class="grid__list-item" x-text="user.name"></p>
-                  <p class="grid__list-item" x-text="user.username"></p>
-                  <p class="grid__list-item" x-text="user.email"></p>
+                <div class="grid__list-item">
+                  <h3 class="grid__list-name" x-text="user.name"></h3>
+                  <span class="grid__list-username" x-text="user.username"></span> :<br/>
+                  <span class="grid__list-email" x-text="user.email"></span>
+                  <p class="grid__list-phone" x-text="user.website"></p>
+                  <p class="grid__list-website" x-text="user.phone"></p>
                 </div>
               </template>
-              <!-- <button class="grid__btn">Click</button> -->
-            </div>
+            </section>
           </div>
         </div>
-        <div class="placeholders" id="4">
+        <div class="grid-wrapper" id="4">
           <div class="grid albums">
             <h2 class="grid__list-title">Albums</h2>
             <div class="grid__list">
@@ -118,7 +118,12 @@
       </section>
       <footer>
         <div class="footer-inner">
-          <div><p>Site footer</p></div>
+          <div>
+            <p>Site footer</p>
+            <p>Site footer</p>
+            <p>Site footer</p>
+            <p>Site footer</p>
+          </div>
       </footer>
     </main>
     <script>
