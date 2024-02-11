@@ -2,13 +2,13 @@
 <html lang="en">
 
 <head>
-  <title>AlpineJs Single Page</title>
+  <title>AlpineJs SPA</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body class="singlepage" x-data="loadVariables(), msg='a global variable!'" x-init="fetchUsers()">
 
-  <main class="container" id="1">
+  <main class="container">
     <header class="primary-header">
       <div class="primary-header__inner">
         <div class="logo">
@@ -40,20 +40,24 @@
           <div>Msg: <span x-text="msg"></span></div>
           <div class="users">
             <h2 class="grid__list-title">User search</h2>
-            <!-- create a new var 'showHelp' = false then toggle onclick for the x-show --> 
+            <!-- create a new var 'showHelp' = false then toggle onclick for the x-show -->
             <div x-data="{ showHelp: false }">
               <button x-on:click="showHelp = ! showHelp">Help</button>
               <div x-show="showHelp">
                 <ul>
                   <li>The page fetches data only once on body load and is stored in allUsers</li>
-                  <li>On search: allUsers is filtered into the filteredUsers array which is the template repeat data</li>
-                  <li>The body x-data loadVariables() globally initializes/defines all the root variables in the function
+                  <li>On search: allUsers is filtered into the filteredUsers array which is the template repeat data
+                  </li>
+                  <li>The body x-data loadVariables() globally initializes/defines all the root variables in the
+                    function
                   </li>
                   <li>Combine a loader and other global vars eg: x-data="loadVariables(), myVar ='Yay'"</li>
-                  <li>If we filter the original allUsers the next search will be on just the remaining records, gone means
+                  <li>If we filter the original allUsers the next search will be on just the remaining records, gone
+                    means
                     gone!</li>
                   <li>We create a new filteredUsers array from the original allUsers every time we search</li>
-                  <li>Note: if you copy an object they are both the same object, so if you filter/delete records in one it
+                  <li>Note: if you copy an object they are both the same object, so if you filter/delete records in one
+                    it
                     also
                     changes the copy. </li>
                   <li>Use the spread operater to de-reference the copy like this</li>
@@ -66,18 +70,19 @@
               </div>
             </div>
             <p>
-              <a href="#" x-on:click="showAll()" class="">showAll</a>
-              <a href="#" x-on:click="hideAll()" class="">hideAll</a>
+              <a href="#" x-on:click="showAll()">showAll</a>
+              <a href="#" x-on:click="hideAll()">hideAll</a>
+
             </p>
             <!-- the name of the user.field to search on and watch searchField changes to run the filter again -->
-            <p x-init="$watch('searchField', value => filterUsers())">Search Field: 
+            <p x-init="$watch('searchField', value => filterUsers())">Search Field:
               <input type="radio" value="name" x-model="searchField">
               <input type="radio" value="email" x-model="searchField">
               <input type="radio" value="phone" x-model="searchField">
               <span x-text="searchField"></span>
             </p>
             <!-- watch for change in searchType and re-filter the list. only show when a searchField is selected -->
-            <p x-init="$watch('searchType', value => filterUsers())" x-show="searchField.length > 0">Search Type: 
+            <p x-init="$watch('searchType', value => filterUsers())" x-show="searchField.length > 0">Search Type:
               <input type="radio" value="startswith" x-model="searchType">
               <input type="radio" value="equals" x-model="searchType">
               <input type="radio" value="contains" x-model="searchType">
@@ -86,137 +91,76 @@
 
             <!-- show when both are selected -->
             <div x-show="searchField.length > 0 && searchType.length > 0">
-              <input x-model="search" @keyup="filterUsers()"
-              placeholder="Search for a user..." type="search" class="grid__form-input" />
+              <input x-model="search" @keyup="filterUsers()" placeholder="Search for a user..." type="search"
+                class="grid__form-input" />
             </div>
 
             <p x-show="search.length > 0">
               Searching <span x-text="allUsers.length"></span>
-              users "<span x-text="searchField"></span>" field that "<span x-text="searchType"></span>" "<span x-text="search"></span>"
+              users "<span x-text="searchField"></span>" field that "<span x-text="searchType"></span>" "<span
+                x-text="search"></span>"
               found <span x-text="filteredUsers.length"></span> users
             </p>
-
+            <button @click="test()">Test</button>
             <br><br>
             <template x-for="user in filteredUsers" :key="user.id">
-              <div class="">
+              <div x-show="selectedUser == 0 || selectedUser==user.id">
                 <hr>
-                <div class="">
-                  <p class="" x-text="user.name"></p>
-                  <p class="" x-text="user.username"></p>
-                  <p class="" x-text="user.email"></p>
-                  <p class="" x-text="user.phone"></p>
-                </div>
-              </div>
+                <div x-init="$watch('selectedUser', value => test(value))">
+                  <input type="radio" :value="user.id" x-model="selectedUser"> Select User
+                  <a href="#" @click="selectedUser = 0">unselectUser</a>
+                  <p x-text="user.name"></p>
+                  <p x-text="user.id"></p>
+                  <p x-text="user.username"></p>
+                  <p x-text="user.email"></p>
+                  <p x-text="user.phone"></p>
+                  <div x-show="selectedUser > 0">
+                    <button @click="fetchAlbums(), userTodos =[], userPosts=[]">fetchAlbums</button>
+                    <button @click="fetchPosts(), userAlbums =[], userTodos=[]">fetchPosts</button>
+                    <button @click="fetchTodos(), userAlbums=[], userPosts=[]">fetchTodos</button>
+                    <template x-for="album in userAlbums" :key="album.id">
+                      <div>Albums:
+                        <div x-text="album.id"></div>
+                        <div x-text="album.title"></div>
+                      </div>
+                    </template>
+                    <template x-for="post in userPosts" :key="post.id">
+                      <div>Post:
+                        <div x-text="post.title"></div>
+                        <div x-text="post.body"></div>
+                      </div>
+                    </template>
+                    <template x-for="item in userTodos" :key="item.id">
+                      <div>Todo:
+                        <div x-text="item.title"></div>
+                        completed=<span x-text="item.completed"></span>
+                      </div>
+                    </template>
+                  </div>
             </template>
+
           </div>
         </div>
       </div>
-      <!-- <div class="placeholders" id="2">
-          <div class="grid theme-brand posts" x-data="{posts: []}" 
-          x-init="posts = await (await fetch('https://jsonplaceholder.typicode.com/posts')).json()">
-            <h2 class="grid__list-title">Posts</h2>
-            <div class="grid__list">
-              <template x-for="post in posts">
-                <div class="grid__list-item">
-                  <h3 x-text="post.title"></h3>
-                  <p x-text="post.body"></p>
-                </div>
-              </template>
-            </div>
-          </div>
-        </div> -->
-      <!-- <div class="placeholders" id="3">
-          <div class="grid theme-wild-llama todos" x-data="{todos: []}" 
-          x-init="todos = await (await fetch('https://jsonplaceholder.typicode.com/todos')).json()">
-            <h2 class="grid__list-title">Todo's</h2>
-            <div class="grid__list">
-              <template x-for="todo in todos">
-                <div class="grid__list-item">
-                  <p x-text="todo.id"></p>
-                </div>
-              </template>
-            </div>
-          </div>
-        </div> -->
-      <!-- <div class="placeholders" id="4">
-          <div class="grid albums">
-            <h2 class="grid__list-title">Albums</h2>
-            <div class="grid__list">
-              <div class="grid__list-item">
-                <header>
-                  <img src="#" alt="An image of someone" />
-                  <h4>Name here</h4>
-                  <p>Verified</p>
-                </header>
-                <section>
-                  <h3>An albums title...</h3>
-                  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quisquam voluptates animi facere a numquam repellat ex laudantium explicabo libero quis, sapiente harum voluptate itaque culpa odit suscipit accusamus ipsa minima?</p>
-                </section>
-              </div>
-              <div class="grid__list-item">
-                <header>
-                  <img src="#" alt="An image of someone" />
-                  <h3>A title...</h3>
-                  <p>Verified</p>
-                </header>
-                <section>
-                  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit.xxx</p>
-                </section>
-              </div>
-              <div class="grid__list-item">
-                <header>
-                  <img src="#" alt="An image of someone" />
-                  <h3>A title...</h3>
-                  <p>Verified</p>
-                </header>
-                <section>
-                  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Cumque eius except</p>
-                </section>
-              </div>
-              <div class="grid__list-item">
-                <header>
-                  <img src="#" alt="An image of someone" />
-                  <h3>A title...</h3>
-                  <p>Verified</p>
-                </header>
-                <section>
-                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.yyy</p>
-                </section>
-              </div>
-              <div class="grid__list-item">
-                <header>
-                  <img src="#" alt="An image of someone" />
-                  <h3>A title...</h3>
-                  <p>Verified</p>
-                </header>
-                <section>
-                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos vero obcaecati ducimus fugiat placeat alias perferendis recusandae nam ipsum, laborum, sint non beatae vitae ea inventore omnis praesentium natus error!</p>
-                </section>
-              </div>
-            </div>
-          </div>
-        </div> -->
-    </section>
-    <!-- <footer>
-      <div class="footer-inner">
-        <div>
-          <p>Site footer</p>
-        </div>
-    </footer> -->
+      </template>
+      </div>
+      </div>
+      </div>
   </main>
   <script>
     function loadVariables() {
-      // it loads functions as well, it replaces react component code  
-      // when getting and setting variable values inside this function we have to use the this. notation
-      // eg; 'search' is a string variable accessed like this locally: this.search = 'abc'
       return {
         search: '',
         searchType: '',   // Radio: startswith, contains, equals
         searchField: '',  // Radio: the user property or field to search: name, email, phone
         allUsers: [],
         filteredUsers: [],
+        selectedUser: 0,
+        userAlbums: [],
+        userTodos: [],
+        userPosts: [],
         test(val) {
-          console.log('test: ', val, 'search=',this.search)
+          console.log('test: ', val, 'search=', this.search, 'selectedUser=', this.selectedUser)
         },
         showAll() {
           // just put all the original users into the template loop array
@@ -241,19 +185,19 @@
             this.filteredUsers = [...this.allUsers.filter((user) => {
               // NB: user[variable] is the same as user.name eg; dot becomes brackets when using variable property names in js
               const fieldVal = user[this.searchField].toLowerCase().trim()
-              
+
               // if true add the row to the return data
-              if(this.searchType === 'startswith') {
-                console.log(fieldVal, 'startsWith: ',  searchVal, fieldVal.startsWith(searchVal))
+              if (this.searchType === 'startswith') {
+                console.log(fieldVal, 'startsWith: ', searchVal, fieldVal.startsWith(searchVal))
                 return fieldVal.startsWith(searchVal)
               }
-              if(this.searchType === 'equals') {
+              if (this.searchType === 'equals') {
                 console.log(fieldVal, 'equals: ', searchVal, fieldVal === searchVal)
-                return fieldVal === searchVal      
+                return fieldVal === searchVal
               }
-              if(this.searchType === 'contains') {
-                console.log( fieldVal, 'contains: ', searchVal, fieldVal.includes(searchVal))
-               return fieldVal.includes(searchVal)
+              if (this.searchType === 'contains') {
+                console.log(fieldVal, 'contains: ', searchVal, fieldVal.includes(searchVal))
+                return fieldVal.includes(searchVal)
               }
             })];
           }
@@ -263,6 +207,25 @@
           fetch('https://jsonplaceholder.typicode.com/users')
             .then(response => response.json())
             .then(response => { this.allUsers = response })
+        },
+
+        fetchAlbums() {
+          // use any fetch/await/syncio code here as long as you update the allUsers array
+          fetch('https://jsonplaceholder.typicode.com/users/' + this.selectedUser + '/albums')
+            .then(response => response.json())
+            .then(response => { this.userAlbums = response })
+        },
+        fetchPosts() {
+          // use any fetch/await/syncio code here as long as you update the allUsers array
+          fetch('https://jsonplaceholder.typicode.com/users/' + this.selectedUser + '/posts')
+            .then(response => response.json())
+            .then(response => { this.userPosts = response })
+        },
+        fetchTodos() {
+          // use any fetch/await/syncio code here as long as you update the allUsers array
+          fetch('https://jsonplaceholder.typicode.com/users/' + this.selectedUser + '/todos')
+            .then(response => response.json())
+            .then(response => { this.userTodos = response })
         }
       };
     }
