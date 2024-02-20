@@ -2,15 +2,6 @@
 .container {
 	margin-inline: auto;
 	width: min(100% - 2rem, 60rem);
-
-	.grid-wrapper {
-		display: flex;
-		flex-direction: column;
-		
-		@media only screen and (min-width: 750px) {
-			flex-direction: row;
-		}
-	}
 }
 
 .grid {
@@ -72,6 +63,31 @@
       .grid__list-item {
         box-shadow: 0 15px 25px var(--drop-shadow);
         border-radius: 0.5rem;
+        padding: 0.8rem;
+      }
+    }
+
+    .posts & {
+      /* column settings */
+      --min-column-size: 200px;
+      --column-count: 3;
+      --gap: 1.5rem;
+
+      /* calculations */
+      --breakpoint: calc(var(--min-column-size) * var(--column-count) + (var(--gap) * (var(--column-count) - 1)));
+      --column-size: calc((100% / var(--column-count)) - var(--gap));
+
+      display: grid;
+      gap: var(--gap);
+      grid-template-columns: repeat(
+        auto-fit, 
+        minmax(
+          min(max(var(--column-size), (100% - var(--breakpoint)) * -999), 100%), 1fr)
+      );
+
+      .grid__list-item {
+        box-shadow: 0 15px 25px var(--drop-shadow);
+        border: 1px solid var(--color-white);
         padding: 0.8rem;
       }
     }
