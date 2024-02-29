@@ -13,16 +13,16 @@
           </div>
           <nav class="nav">
             <ul class="nav__list">
-              <li class="nav__tag">
+              <li class="nav__list--tag">
                 <a href="#1" target="_self">Home</a>
               </li>
-              <li class="nav__tag">
+              <li class="nav__list--tag">
                 <a href="#4" target="_self">Albums</a>
               </li>
-              <li class="nav__tag">
+              <li class="nav__list--tag">
                 <a href="#2" target="_self">Posts</a>
               </li>
-              <li class="nav__tag">
+              <li class="nav__list--tag">
                 <a href="#3" target="_self">Todos</a>
               </li>
             </ul>
@@ -36,11 +36,15 @@
             <header >
               <h2 class="grid__list-title">User search</h2>
               <!-- Search input -->
-              <input class="form__input" 
-                x-ref="searchInput"
-                x-model="search"
-                x-on:keydown.window.prevent.slash="$refs.searchInput.focus()" 
-                placeholder="Search for a user..." type="search"/>
+              <form class="form__wrapper">
+                <label for="form__input-search">
+                  <input id="form__input-search" class="form__input" pattern="[A-Za-z ]" placeholder="search for someone"
+                    x-ref="searchInput"
+                    x-model="search"
+                    x-on:keydown.window.prevent.slash="$refs.searchInput.focus()" 
+                    placeholder="Search for a user..." type="search" />
+                </label>
+              </form>
             </header>
             <section class="grid__list">
               <template 
@@ -116,8 +120,54 @@
           </div>
         </div>
         <div class="wrapper">
-          <div class="grid posts">
-            <h2 class="grid__list-title">Albums</h2>
+          <div class="grid posts" id="2">
+            <h2 class="grid__list-title">Posts</h2>
+            <div class="grid__list">
+              <div class="grid__list-item">
+                <h3>Some copy</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, id? Cum sint natus dignissimos at quod.</p>
+              </div>
+              <div class="grid__list-item">
+                <h3>Some copy</h3>
+                <p>Maxime doloremque iure vitae, dolore, neque accusantium voluptatem ipsum unde dolores id quaerat. Quidem.
+                </p>
+              </div>
+              <div class="grid__list-item">
+                <h3>Some copy</h3>
+                <p>Maxime doloremque iure vitae, dolore, neque accusantium voluptatem ipsum unde dolores id quaerat. Quidem.
+                </p>
+              </div>
+              <div class="grid__list-item">
+                <h3>Some copy</h3>
+                <p>Maxime doloremque iure vitae, dolore, neque accusantium voluptatem ipsum unde dolores id quaerat. Quidem.
+                </p>
+              </div>
+              <div class="grid__list-item">
+                <h3>Some copy</h3>
+                <p>Maxime doloremque iure vitae, dolore, neque accusantium voluptatem ipsum unde dolores id quaerat. Quidem.
+                </p>
+              </div>
+              <div class="grid__list-item">
+                <h3>Some copy</h3>
+                <p>Maxime doloremque iure vitae, dolore, neque accusantium voluptatem ipsum unde dolores id quaerat. Quidem.
+                </p>
+              </div>
+              <div class="grid__list-item">
+                <h3>Some copy</h3>
+                <p>Maxime doloremque iure vitae, dolore, neque accusantium voluptatem ipsum unde dolores id quaerat. Quidem.
+                </p>
+              </div>
+              <div class="grid__list-item">
+                <h3>Some copy</h3>
+                <p>Maxime doloremque iure vitae, dolore, neque accusantium voluptatem ipsum unde dolores id quaerat. Quidem.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="wrapper">
+          <div class="grid todos" id="3">
+            <h2 class="grid__list-title">To Do's</h2>
             <div class="grid__list">
               <div class="grid__list-item">
                 <h3>Some copy</h3>
@@ -165,9 +215,6 @@
       <footer>
         <div class="footer-inner">
           <div>
-            <p>Site footer</p>
-            <p>Site footer</p>
-            <p>Site footer</p>
             <p>Site footer</p>
           </div>
       </footer>

@@ -29,6 +29,11 @@
   --drop-shadow: hsl(218 39% 10% / .5);
 
   --nav-menu-height: 50px;
+
+  --valid: lime;
+  --focus: orange;
+  --invalid: red;
+  --blur: #ccc;
 }
 
 $colors: hsl(212, 44%, 77%), hsl(212, 61%, 45%), hsl(212, 76%, 65%), hsl(212, 47%, 60%), hsl(212, 84%, 51%), hsl(253, 8%, 44%); 
